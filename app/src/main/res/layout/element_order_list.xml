@@ -20,7 +20,7 @@
         app:layout_constraintTop_toBottomOf="@+id/tvTime" />
 
     <TextView
-        android:id="@+id/tvTimeDelivery"
+        android:id="@+id/tvTimeTravel"
         android:layout_width="wrap_content"
         android:layout_height="21dp"
         android:layout_marginStart="8dp"

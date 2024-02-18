@@ -48,14 +48,14 @@ class OrdersFragment : Fragment() {
     ): View? {
         _binding = FragmentOrderBinding.inflate(inflater, container,false)
 
-        val timeDeliveryArray = resources.getStringArray(R.array.TIME_DELIVERY)
+        val timeTravelArray = resources.getStringArray(R.array.TIME_TRAVEL)
         val adapter = ArrayAdapter(
             requireContext(),
             android.R.layout.simple_spinner_item,
-            timeDeliveryArray)
-        binding.spTimeDelivery.adapter = adapter
-        binding.spTimeDelivery.setSelection(orders.timeDelivery)
-        binding.spTimeDelivery.onItemSelectedListener = object :
+            timeTravelArray)
+        binding.spTimeTravel.adapter = adapter
+        binding.spTimeTravel.setSelection(orders.timeTravel)
+        binding.spTimeTravel.onItemSelectedListener = object :
             AdapterView.OnItemSelectedListener {
             override fun onItemSelected(
                 parent: AdapterView<*>?,
@@ -63,7 +63,7 @@ class OrdersFragment : Fragment() {
                 position: Int,
                 id: Long
             ) {
-                orders.timeDelivery = position
+                orders.timeTravel = position
             }
 
             override fun onNothingSelected(parent: AdapterView<*>?) {
@@ -100,7 +100,7 @@ class OrdersFragment : Fragment() {
             orders.orderDetails = binding.edOrderDetails.text.toString()
             orders.time = binding.edHour.text.toString() + ':' + binding.edMinute.text.toString()
             //date чуть выше
-            binding.spTimeDelivery.onItemSelectedListener = object :
+            binding.spTimeTravel.onItemSelectedListener = object :
                 AdapterView.OnItemSelectedListener {
                 override fun onItemSelected(
                     parent: AdapterView<*>?,
@@ -108,7 +108,7 @@ class OrdersFragment : Fragment() {
                     position: Int,
                     id: Long
                 ) {
-                    orders.timeDelivery = position
+                    orders.timeTravel = position
                 }
 
                 override fun onNothingSelected(parent: AdapterView<*>?) {
@@ -128,7 +128,7 @@ class OrdersFragment : Fragment() {
             orders.orderDetails = binding.edOrderDetails.text.toString()
             orders.time = binding.edHour.text.toString() + ':' + binding.edMinute.text.toString()
             //date чуть выше
-            binding.spTimeDelivery.onItemSelectedListener = object :
+            binding.spTimeTravel.onItemSelectedListener = object :
                 AdapterView.OnItemSelectedListener {
                 override fun onItemSelected(
                     parent: AdapterView<*>?,
@@ -136,7 +136,7 @@ class OrdersFragment : Fragment() {
                     position: Int,
                     id: Long
                 ) {
-                    orders.timeDelivery = position
+                    orders.timeTravel = position
                 }
 
                 override fun onNothingSelected(parent: AdapterView<*>?) {

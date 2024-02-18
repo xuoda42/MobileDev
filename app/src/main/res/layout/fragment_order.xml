@@ -142,7 +142,7 @@
             app:layout_constraintTop_toBottomOf="@+id/cvDate" />
 
         <Spinner
-            android:id="@+id/spTimeDelivery"
+            android:id="@+id/spTimeTravel"
             android:layout_width="244dp"
             android:layout_height="29dp"
             android:layout_marginStart="8dp"
@@ -158,7 +158,7 @@
             android:layout_marginTop="20dp"
             android:text="Телефон"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/spTimeDelivery" />
+            app:layout_constraintTop_toBottomOf="@+id/spTimeTravel" />
 
         <EditText
             android:id="@+id/EdPhoneNumber"
@@ -173,7 +173,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toEndOf="@+id/phoneNumber"
-            app:layout_constraintTop_toBottomOf="@+id/spTimeDelivery" />
+            app:layout_constraintTop_toBottomOf="@+id/spTimeTravel" />
 
         <TextView
             android:id="@+id/price"

@@ -152,9 +152,9 @@ class OrderedFragment : Fragment() {
                     val tvD = itemView.findViewById<TextView>(R.id.tvTime)
                     tvD.text = orders.time
 
-                    val tvHC = itemView.findViewById<TextView>(R.id.tvTimeDelivery)
-                    val timeDeliveryArray = resources.getStringArray(R.array.TIME_DELIVERY)
-                    tvHC.text = timeDeliveryArray.get(orders.timeDelivery)
+                    val tvHC = itemView.findViewById<TextView>(R.id.tvTimeTravel)
+                    val timeTravelArray = resources.getStringArray(R.array.TIME_TRAVEL)
+                    tvHC.text = timeTravelArray.get(orders.timeTravel)
 
                     val tvP = itemView.findViewById<TextView>(R.id.tvDate)
                     val dateFormat = SimpleDateFormat("dd.MM.yyyy", java.util.Locale.getDefault())
@@ -191,7 +191,7 @@ class OrderedFragment : Fragment() {
                         true
                     }
                     tvP.setOnLongClickListener{
-                        viewModel.set_Courier_ByTimeDelivery(couriers)
+                        viewModel.set_Courier_ByTimeTravel(couriers)
 
                         true
                     }

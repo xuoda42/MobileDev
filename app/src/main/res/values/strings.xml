@@ -4,7 +4,7 @@
     <string name="preference_key_group_list">List.preference.key.group_list</string>
     <string name="preference_key_students_list">List.preference.key.student_list</string>
     
-    <string-array name="TIME_DELIVERY">
+    <string-array name="TIME_TRAVEL">
         <item>10 минут</item>
         <item>30 минут</item>
         <item>60 минут</item>

@@ -28,7 +28,7 @@ data class Orders(
     @SerializedName("date") @ColumnInfo(name = "date") var date : Date = Date(),
     @SerializedName("courierID") @ColumnInfo(name = "courier_id") var courierID: Int=0,
     @SerializedName("phone") var phone: String="",
-    @SerializedName("timeDelivery") @ColumnInfo(name = "time_delivery") var timeDelivery: Int=0,
+    @SerializedName("timeTravel") @ColumnInfo(name = "time_travel") var timeTravel: Int=0,
     @SerializedName("price") var price: String="",
     @SerializedName("comment") var comment: String=""
 )

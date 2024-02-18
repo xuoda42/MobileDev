@@ -94,8 +94,8 @@ class AppRepository {
     fun getCourierOrdersByTime(courierID: Int) =
         listOfOrders.value?.filter {it.courierID == courierID }?.sortedBy { it.time } ?:listOf()
 
-    fun getCourierOrdersByTimeDelivery(courierID: Int) =
-        listOfOrders.value?.filter {it.courierID == courierID }?.sortedBy { it.timeDelivery } ?:listOf()
+    fun getCourierOrdersByTimeTravel(courierID: Int) =
+        listOfOrders.value?.filter {it.courierID == courierID }?.sortedBy { it.timeTravel } ?:listOf()
     /////////////////////////////////////////////////////////////////////
 
 
