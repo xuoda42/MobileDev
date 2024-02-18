@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">List</string>
+    <string name="preference_key_faculty_list">List.preference.key.faculty</string>
+    <string name="preference_key_group_list">List.preference.key.group_list</string>
+    <string name="preference_key_students_list">List.preference.key.student_list</string>
+    
+    <string-array name="TIME_DELIVERY">
+        <item>10 минут</item>
+        <item>30 минут</item>
+        <item>60 минут</item>
+    </string-array>
+<!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    
+</resources>

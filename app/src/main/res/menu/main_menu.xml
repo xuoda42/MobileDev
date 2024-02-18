@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/miNewCompany"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:icon="@android:drawable/btn_star_big_on"
+        android:title="Добавить службу доставки" />
+    <item
+        android:id="@+id/miUpdateCompany"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:title="Изменить службу доставки" />
+    <item
+        android:id="@+id/miDeleteCompany"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:title="Удалить службу доставки" />
+    <item
+        android:id="@+id/miAppendCourier"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:title="Добавить курьера" />
+    <item
+        android:id="@+id/miUpdateCourier"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:title="Изменить курьера" />
+    <item
+        android:id="@+id/miDeleteCourier"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:title="Удалить курьера" />
+    <item
+        android:id="@+id/miLogin"
+        android:title="Логин" />
+    <item
+        android:id="@+id/miExit"
+        android:title="Выход" />
+</menu>
