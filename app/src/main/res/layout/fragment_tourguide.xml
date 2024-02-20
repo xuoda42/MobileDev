@@ -4,25 +4,25 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.list.fragments.CouriersFragment">
+    tools:context="com.example.list.fragments.TourGuidesFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <androidx.viewpager2.widget.ViewPager2
-            android:id="@+id/vpCourier"
+            android:id="@+id/vpTourGuide"
             android:layout_width="0dp"
             android:layout_height="619dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.529"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@id/tlCourier"
+            app:layout_constraintTop_toTopOf="@id/tlTourGuide"
             app:layout_constraintVertical_bias="0.746" />
 
         <com.google.android.material.tabs.TabLayout
-            android:id="@+id/tlCourier"
+            android:id="@+id/tlTourGuide"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintEnd_toEndOf="parent"

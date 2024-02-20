@@ -7,13 +7,13 @@ import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import com.example.list.data.Orders
 import com.example.list.data.Company
-import com.example.list.data.Couriers
+import com.example.list.data.TourGuides
 import com.example.list.data.User
 
 
 @Database(
     entities = [Company::class,
-        Couriers::class,
+        TourGuides::class,
         Orders::class,
                 User::class
                ],

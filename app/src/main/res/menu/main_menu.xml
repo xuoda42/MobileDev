@@ -7,32 +7,32 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:icon="@android:drawable/btn_star_big_on"
-        android:title="Добавить службу доставки" />
+        android:title="Добавить туристическое агенство" />
     <item
         android:id="@+id/miUpdateCompany"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:title="Изменить службу доставки" />
+        android:title="Изменить туристическое агенство" />
     <item
         android:id="@+id/miDeleteCompany"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:title="Удалить службу доставки" />
+        android:title="Удалить туристическое агенство" />
     <item
-        android:id="@+id/miAppendCourier"
+        android:id="@+id/miAppendTourGuide"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:title="Добавить курьера" />
+        android:title="Добавить гида" />
     <item
-        android:id="@+id/miUpdateCourier"
+        android:id="@+id/miUpdateTourGuide"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:title="Изменить курьера" />
+        android:title="Изменить гида" />
     <item
-        android:id="@+id/miDeleteCourier"
+        android:id="@+id/miDeleteTourGuide"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:title="Удалить курьера" />
+        android:title="Удалить гида" />
     <item
         android:id="@+id/miLogin"
         android:title="Логин" />

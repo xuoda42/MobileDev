@@ -18,7 +18,7 @@ import com.example.list.api.ListAPI
 import com.example.list.api.ListConnection
 import com.example.list.api.PostCompany
 import com.example.list.api.PostResult
-import com.example.list.api.PostCouriers
+import com.example.list.api.PostTourGuides
 import com.example.list.api.PostOrders
 import com.example.list.api.UPDATE_COMPANY
 import com.example.list.api.UPDATE_MAKERS
@@ -26,8 +26,8 @@ import com.example.list.api.UPDATE_DOCUMENTS
 
 import com.example.list.data.Company
 import com.example.list.data.Companies
-import com.example.list.data.Couriers
-import com.example.list.data.Couriersed
+import com.example.list.data.TourGuides
+import com.example.list.data.TourGuidesed
 import com.example.list.data.Orders
 import com.example.list.data.Ordered
 import com.example.list.data.User
@@ -61,7 +61,7 @@ class AppRepository {
     }
 
     var company: MutableLiveData<Company> = MutableLiveData()
-    var couriers: MutableLiveData<Couriers> = MutableLiveData()
+    var tourGuides: MutableLiveData<TourGuides> = MutableLiveData()
     var orders: MutableLiveData<Orders> = MutableLiveData()
 
     fun setCurrentCompany(_company: Company){
@@ -72,12 +72,12 @@ class AppRepository {
         fetchCompanys()
     }
 
-    fun setCurrentGroup(_couriers:Couriers){
-        couriers.postValue(_couriers)
+    fun setCurrentGroup(_tourGuides:TourGuides){
+        tourGuides.postValue(_tourGuides)
     }
 
-    val companyCouriers
-        get() = listOfCouriers.value?.filter{it.companyID == (company.value?.id?:0)}?.sortedBy { it.name } ?:  listOf()
+    val companyTourGuides
+        get() = listOfTourGuides.value?.filter{it.companyID == (company.value?.id?:0)}?.sortedBy { it.name } ?:  listOf()
 
     fun setCurrentStudent(_orders:Orders){
         orders.postValue( _orders)
@@ -85,17 +85,17 @@ class AppRepository {
 
 
     //////////////////////////////////////////////////////////////////
-    fun getCourierOrdersByAdress(courierID: Int) =
-        (listOfOrders.value?.filter {it.courierID == courierID }?.sortedBy { it.address } ?:listOf())
+    fun getTourGuideOrdersByAdress(tourGuideID: Int) =
+        (listOfOrders.value?.filter {it.tourGuideID == tourGuideID }?.sortedBy { it.address } ?:listOf())
 
-    fun getCourierOrdersByDate(courierID: Int) =
-        listOfOrders.value?.filter {it.courierID == courierID }?.sortedBy { it.date } ?:listOf()
+    fun getTourGuideOrdersByDate(tourGuideID: Int) =
+        listOfOrders.value?.filter {it.tourGuideID == tourGuideID }?.sortedBy { it.date } ?:listOf()
 
-    fun getCourierOrdersByTime(courierID: Int) =
-        listOfOrders.value?.filter {it.courierID == courierID }?.sortedBy { it.time } ?:listOf()
+    fun getTourGuideOrdersByTime(tourGuideID: Int) =
+        listOfOrders.value?.filter {it.tourGuideID == tourGuideID }?.sortedBy { it.time } ?:listOf()
 
-    fun getCourierOrdersByTimeTravel(courierID: Int) =
-        listOfOrders.value?.filter {it.courierID == courierID }?.sortedBy { it.timeTravel } ?:listOf()
+    fun getTourGuideOrdersByTimeTravel(tourGuideID: Int) =
+        listOfOrders.value?.filter {it.tourGuideID == tourGuideID }?.sortedBy { it.timeTravel } ?:listOf()
     /////////////////////////////////////////////////////////////////////
 
 
@@ -107,14 +107,14 @@ class AppRepository {
 
     val listOfOrders: LiveData<List<Orders>> = listDB.getAllOrders().asLiveData()
     val listOfCompany: LiveData<List<Company>> = listDB.getCompany().asLiveData()
-    val listOfCouriers: LiveData<List<Couriers>> = listDB.getAllCouriers().asLiveData()
+    val listOfTourGuides: LiveData<List<TourGuides>> = listDB.getAllTourGuides().asLiveData()
 
     private var listAPI = ListConnection.getClient().create(ListAPI::class.java)
 
     fun fetchCompanys(){
         listAPI.getCompanys().enqueue(object: Callback<Companies> {
             override fun onFailure(call: Call<Companies>, t :Throwable){
-                Log.d(TAG,"Ошибка получения списка служеб доставки", t)
+                Log.d(TAG,"Ошибка получения списка туристических агенств", t)
             }
             override fun onResponse(
                 call : Call<Companies>,
@@ -123,14 +123,14 @@ class AppRepository {
                 if (response.code()==200){
                     val companys= response.body()
                     val items =companys?.items?:emptyList()
-                    Log.d(TAG,"Получен список служеб доставки $items")
+                    Log.d(TAG,"Получен список туристических агенств $items")
                     myCoroutineScope.launch{
                         listDB.deleteAllCompany()
                         for (f in items){
                             listDB.insertCompany(f)
                         }
                     }
-                    fetchCouriers()
+                    fetchTourGuides()
                 }
             }
         })
@@ -144,19 +144,19 @@ class AppRepository {
                     if (response.code()==200) fetchCompanys()
                 }
                 override fun onFailure(call: Call<PostResult>, t: Throwable){
-                    Log.d(TAG,"Ошибка записи службы доставки",t)
+                    Log.d(TAG,"Ошибка записи туристического агенства",t)
                 }
             })
     }
 
-    private fun updateCouriers(postCouriers: PostCouriers){
-        listAPI.postCourier(postCouriers)
+    private fun updateTourGuides(postTourGuides: PostTourGuides){
+        listAPI.postTourGuide(postTourGuides)
             .enqueue(object : Callback<PostResult>{
                 override fun onResponse(call:Call<PostResult>,response: Response<PostResult>){
                     if (response.code()==200) fetchCompanys()
                 }
                 override fun onFailure(call:Call<PostResult>,t: Throwable){
-                    Log.d(TAG,"Ошибка записи службы доставки",t)
+                    Log.d(TAG,"Ошибка записи туристического агенства",t)
                 }
             })
     }
@@ -173,24 +173,24 @@ class AppRepository {
         updateCompanies(PostCompany(DELETE_COMPANY, company))
     }
 
-    fun fetchCouriers(){
-        listAPI.getCouriers().enqueue(object: Callback<Couriersed> {
-            override fun onFailure(call: Call<Couriersed>, t: Throwable) {
-                Log.d(TAG, "Ошибка получения списка курьеров", t)
+    fun fetchTourGuides(){
+        listAPI.getTourGuides().enqueue(object: Callback<TourGuidesed> {
+            override fun onFailure(call: Call<TourGuidesed>, t: Throwable) {
+                Log.d(TAG, "Ошибка получения списка гидов", t)
             }
 
             override fun onResponse(
-                call: Call<Couriersed>,
-                response: Response<Couriersed>
+                call: Call<TourGuidesed>,
+                response: Response<TourGuidesed>
             ) {
                 if (response.code() == 200) {
-                    val couriers = response.body()
-                    val items = couriers?.items ?: emptyList()
-                    Log.d(TAG, "Получен список курьеров $items")
+                    val tourGuides = response.body()
+                    val items = tourGuides?.items ?: emptyList()
+                    Log.d(TAG, "Получен список гидов $items")
                     myCoroutineScope.launch {
-                        listDB.deleteAllCouriers()
+                        listDB.deleteAllTourGuides()
                         for (g in items) {
-                            listDB.insertCouriers(g)
+                            listDB.insertTourGuides(g)
                         }
                     }
                     fetchOrders()
@@ -199,16 +199,16 @@ class AppRepository {
         })
     }
 
-    fun addCourier(couriers: Couriers){
-        updateCouriers(PostCouriers(APPEND_MAKERS, couriers))
+    fun addTourGuide(tourGuides: TourGuides){
+        updateTourGuides(PostTourGuides(APPEND_MAKERS, tourGuides))
     }
 
-    fun updateCourier(couriers: Couriers){
-        updateCouriers(PostCouriers(UPDATE_MAKERS, couriers))
+    fun updateTourGuide(tourGuides: TourGuides){
+        updateTourGuides(PostTourGuides(UPDATE_MAKERS, tourGuides))
     }
 
-    fun deleteCourier(couriers: Couriers){
-        updateCouriers(PostCouriers(DELETE_MAKERS, couriers))
+    fun deleteTourGuide(tourGuides: TourGuides){
+        updateTourGuides(PostTourGuides(DELETE_MAKERS, tourGuides))
     }
 
 

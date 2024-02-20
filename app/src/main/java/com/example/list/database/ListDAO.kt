@@ -7,7 +7,7 @@ import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Update
 import com.example.list.data.Company
-import com.example.list.data.Couriers
+import com.example.list.data.TourGuides
 import com.example.list.data.Orders
 import com.example.list.data.User
 import kotlinx.coroutines.flow.Flow
@@ -35,26 +35,26 @@ interface ListDAO {
     @Query("DELETE FROM Company")
     suspend fun deleteAllCompany()
 
-    @Query("SELECT * FROM Couriers")
-    fun getAllCouriers(): Flow<List<Couriers>>
+    @Query("SELECT * FROM TourGuides")
+    fun getAllTourGuides(): Flow<List<TourGuides>>
 
-    @Query("SELECT * FROM Couriers where company_id=:companyID")
-    fun getCompanyCouriers(companyID : UUID): Flow<List<Couriers>>
+    @Query("SELECT * FROM TourGuides where company_id=:companyID")
+    fun getCompanyTourGuides(companyID : UUID): Flow<List<TourGuides>>
 
-    @Insert(entity = Couriers::class, onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertCourier(couriers: Couriers)
+    @Insert(entity = TourGuides::class, onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertTourGuide(tourGuides: TourGuides)
 
-    @Delete(entity = Couriers::class)
-    suspend fun deleteCourier(couriers: Couriers)
+    @Delete(entity = TourGuides::class)
+    suspend fun deleteTourGuide(tourGuides: TourGuides)
 
-    @Query("DELETE FROM Couriers")
-    suspend fun deleteAllCouriers()
+    @Query("DELETE FROM TourGuides")
+    suspend fun deleteAllTourGuides()
 
     @Query("SELECT * FROM Orders")
     fun getAllOrders(): Flow<List<Orders>>
 
-    @Query("SELECT * FROM Orders where courier_id=:courierID")
-    fun getCourierOrders(courierID : UUID): Flow<List<Orders>>
+    @Query("SELECT * FROM Orders where tour_guide_id=:tourGuideID")
+    fun getTourGuideOrders(tourGuideID : UUID): Flow<List<Orders>>
 
     @Insert(entity = Orders::class, onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertOrder(orders: Orders)

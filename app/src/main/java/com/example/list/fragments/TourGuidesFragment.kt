@@ -11,30 +11,30 @@ import android.widget.TextView
 import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.example.list.MainActivity
-import com.example.list.data.Couriers
+import com.example.list.data.TourGuides
 import com.example.list.interfaces.MainActivityInterface
 import com.example.list1110.R
-import com.example.list1110.databinding.FragmentCourierBinding
+import com.example.list1110.databinding.FragmentTourguideBinding
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 
-class CouriersFragment : Fragment(), MainActivity.Edit {
+class TourGuidesFragment : Fragment(), MainActivity.Edit {
 
     companion object {
-        private var INSTANCE : CouriersFragment? = null
-        fun getInstance(): CouriersFragment{
-            if (INSTANCE == null) INSTANCE = CouriersFragment()
-            return INSTANCE ?: throw Exception("CourierFragment не создан")
+        private var INSTANCE : TourGuidesFragment? = null
+        fun getInstance(): TourGuidesFragment{
+            if (INSTANCE == null) INSTANCE = TourGuidesFragment()
+            return INSTANCE ?: throw Exception("TourGuideFragment не создан")
         }
-        fun newInstance(): CouriersFragment{
-            INSTANCE = CouriersFragment()
+        fun newInstance(): TourGuidesFragment{
+            INSTANCE = TourGuidesFragment()
             return INSTANCE!!
         }
     }
 
-    private lateinit var viewModel: CouriersViewModel
+    private lateinit var viewModel: TourGuidesViewModel
     private var tabPosition : Int = 0
-    private lateinit var _binding: FragmentCourierBinding
+    private lateinit var _binding: FragmentTourguideBinding
     private val binding get() = _binding
 
 
@@ -42,23 +42,23 @@ class CouriersFragment : Fragment(), MainActivity.Edit {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = FragmentCourierBinding.inflate(inflater, container, false)
+        _binding = FragmentTourguideBinding.inflate(inflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel = ViewModelProvider(this).get(CouriersViewModel::class.java)
+        viewModel = ViewModelProvider(this).get(TourGuidesViewModel::class.java)
         val ma = (requireActivity() as MainActivityInterface)
-        ma.updateTitle("Служба доставки \"${viewModel.company?.name}\"")
+        ma.updateTitle("Туристическое агенства \"${viewModel.company?.name}\"")
 
-        viewModel.couriersList.observe(viewLifecycleOwner){
+        viewModel.tourGuidesList.observe(viewLifecycleOwner){
             createUI(it)
         }
     }
 
-    private inner class GroipPageAdapter(fa: FragmentActivity, private val makers: List<Couriers>?): FragmentStateAdapter(fa){
+    private inner class GroipPageAdapter(fa: FragmentActivity, private val makers: List<TourGuides>?): FragmentStateAdapter(fa){
         override fun getItemCount(): Int {
             return (makers?.size?: 0)
         }
@@ -68,20 +68,20 @@ class CouriersFragment : Fragment(), MainActivity.Edit {
         }
     }
 
-    private fun createUI(couriersList: List<Couriers>){
-        binding.tlCourier.clearOnTabSelectedListeners()
-        binding.tlCourier.removeAllTabs()
+    private fun createUI(tourGuidesList: List<TourGuides>){
+        binding.tlTourGuide.clearOnTabSelectedListeners()
+        binding.tlTourGuide.removeAllTabs()
 
-        for (i in 0 until (couriersList.size)){
-            binding.tlCourier.addTab(binding.tlCourier.newTab().apply {
-                text = couriersList.get(i).name
+        for (i in 0 until (tourGuidesList.size)){
+            binding.tlTourGuide.addTab(binding.tlTourGuide.newTab().apply {
+                text = tourGuidesList.get(i).name
             })
         }
-        val adapter = GroipPageAdapter(requireActivity(), couriersList)
-        binding.vpCourier.adapter=adapter
-        TabLayoutMediator(binding.tlCourier, binding.vpCourier, true, true){
+        val adapter = GroipPageAdapter(requireActivity(), tourGuidesList)
+        binding.vpTourGuide.adapter=adapter
+        TabLayoutMediator(binding.tlTourGuide, binding.vpTourGuide, true, true){
                 tab, pos ->
-            tab.text = couriersList.get(pos).name
+            tab.text = tourGuidesList.get(pos).name
         }.attach()
         tabPosition = 0
         if (viewModel.group != null)
@@ -90,12 +90,12 @@ class CouriersFragment : Fragment(), MainActivity.Edit {
             else
                 0
         viewModel.setCurrentGroup(tabPosition)
-        binding.tlCourier.selectTab(binding.tlCourier.getTabAt(tabPosition), true)
+        binding.tlTourGuide.selectTab(binding.tlTourGuide.getTabAt(tabPosition), true)
 
-        binding.tlCourier.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener{
+        binding.tlTourGuide.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener{
             override fun onTabSelected(tab: TabLayout.Tab?) {
                 tabPosition = tab?.position!!
-                viewModel.setCurrentGroup(couriersList[tabPosition])
+                viewModel.setCurrentGroup(tourGuidesList[tabPosition])
             }
 
             override fun onTabUnselected(tab: TabLayout.Tab?) {
@@ -122,7 +122,7 @@ class CouriersFragment : Fragment(), MainActivity.Edit {
         if (viewModel.group == null) return
         AlertDialog.Builder(requireContext())
             .setTitle("Удаление")
-            .setMessage("Вы действительно хотите удалить курьера ${viewModel.group?.name?:""}?")
+            .setMessage("Вы действительно хотите удалить гида ${viewModel.group?.name?:""}?")
             .setPositiveButton("ДА"){ _, _ ->
                 viewModel.deleteGroup()
             }
@@ -137,7 +137,7 @@ class CouriersFragment : Fragment(), MainActivity.Edit {
         val messageText = mDialogView.findViewById<TextView>(R.id.tvInfo)
         val inputString = mDialogView.findViewById<TextView>(R.id.etInput)
         inputString.setText(groupName)
-        messageText.text = "Укажите наименование курьера"
+        messageText.text = "Укажите имя гида"
 
         android.app.AlertDialog.Builder(requireContext())
             .setTitle("ИЗМЕНЕНИЕ ДАННЫХ")
@@ -161,7 +161,7 @@ class CouriersFragment : Fragment(), MainActivity.Edit {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(CouriersViewModel::class.java)
+        viewModel = ViewModelProvider(this).get(TourGuidesViewModel::class.java)
         // TODO: Use the ViewModel
     }
 

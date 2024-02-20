@@ -4,7 +4,7 @@ package com.example.list.fragments
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.list.data.Couriers
+import com.example.list.data.TourGuides
 import com.example.list.data.Orders
 import com.example.list.repository.AppRepository
 import kotlinx.coroutines.launch
@@ -20,14 +20,14 @@ class OrdersViewModel : ViewModel() {
     val order
         get()=_orders
 
-    lateinit var couriers: Couriers
+    lateinit var tourGuides: TourGuides
 
 
 
-    fun set_Courier_ByAdress(couriers: Couriers){
-        this.couriers = couriers
+    fun set_TourGuide_ByAdress(tourGuides: TourGuides){
+        this.tourGuides = tourGuides
         AppRepository.getInstance().listOfOrders.observeForever {
-            ordersList.postValue(AppRepository.getInstance().getCourierOrdersByAdress(couriers.id))
+            ordersList.postValue(AppRepository.getInstance().getTourGuideOrdersByAdress(tourGuides.id))
         }
         AppRepository.getInstance().orders.observeForever {
             _orders = it
@@ -35,28 +35,28 @@ class OrdersViewModel : ViewModel() {
     }
 
     ////////////////////////////////////////////////////////
-    fun set_Courier_ByDate(couriers: Couriers){
-        this.couriers = couriers
+    fun set_TourGuide_ByDate(tourGuides: TourGuides){
+        this.tourGuides = tourGuides
         AppRepository.getInstance().listOfOrders.observeForever {
-            ordersList.postValue(AppRepository.getInstance().getCourierOrdersByDate(couriers.id).reversed())
+            ordersList.postValue(AppRepository.getInstance().getTourGuideOrdersByDate(tourGuides.id).reversed())
         }
         AppRepository.getInstance().orders.observeForever {
             _orders = it
         }
     }
-    fun set_Courier_ByTime(couriers: Couriers){
-        this.couriers = couriers
+    fun set_TourGuide_ByTime(tourGuides: TourGuides){
+        this.tourGuides = tourGuides
         AppRepository.getInstance().listOfOrders.observeForever {
-            ordersList.postValue(AppRepository.getInstance().getCourierOrdersByTime(couriers.id))
+            ordersList.postValue(AppRepository.getInstance().getTourGuideOrdersByTime(tourGuides.id))
         }
         AppRepository.getInstance().orders.observeForever {
             _orders = it
         }
     }
-    fun set_Courier_ByTimeTravel(couriers: Couriers){
-        this.couriers = couriers
+    fun set_TourGuide_ByTimeTravel(tourGuides: TourGuides){
+        this.tourGuides = tourGuides
         AppRepository.getInstance().listOfOrders.observeForever {
-            ordersList.postValue(AppRepository.getInstance().getCourierOrdersByTimeTravel(couriers.id).reversed())
+            ordersList.postValue(AppRepository.getInstance().getTourGuideOrdersByTimeTravel(tourGuides.id).reversed())
         }
         AppRepository.getInstance().orders.observeForever {
             _orders = it

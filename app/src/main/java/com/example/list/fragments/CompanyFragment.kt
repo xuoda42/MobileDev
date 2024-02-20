@@ -50,7 +50,7 @@ class CompanyFragment : Fragment(), MainActivity.Edit {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        (requireActivity() as MainActivityInterface).updateTitle("Службы доставки")
+        (requireActivity() as MainActivityInterface).updateTitle("Туристическое агенство")
         viewModel = ViewModelProvider(this).get(CompanyViewModel::class.java)
         viewModel.companyList.observe(viewLifecycleOwner){
             binding.rvCompany.adapter=CompanyListAdapter(it)
@@ -100,7 +100,7 @@ class CompanyFragment : Fragment(), MainActivity.Edit {
 
                     tv.setOnLongClickListener{
                         tv.callOnClick()
-                        (requireActivity() as MainActivityInterface).showFragment(NamesOfFragment.COURIERS)
+                        (requireActivity() as MainActivityInterface).showFragment(NamesOfFragment.TOURT_GUIDES)
                         true
                     }
                 }
@@ -124,7 +124,7 @@ class CompanyFragment : Fragment(), MainActivity.Edit {
     private fun deleteDialog(){
         AlertDialog.Builder(requireContext())
             .setTitle("Удаление")
-            .setMessage("Вы действительно хоитите удалить службу доставки ${viewModel.company?.name?: ""}?")
+            .setMessage("Вы действительно хоитите удалить туристическое агенство ${viewModel.company?.name?: ""}?")
             .setPositiveButton("Да"){_,_ ->
                 viewModel.deleteFaculty()
             }
@@ -139,7 +139,7 @@ class CompanyFragment : Fragment(), MainActivity.Edit {
         val messageText = mDialogView.findViewById<TextView>(R.id.tvInfo)
         val inputString= mDialogView.findViewById<EditText>(R.id.etInput)
         inputString.setText(companyName)
-        messageText.text="Укажите наименование службы доставки"
+        messageText.text="Укажите наименование туристического агенства"
 
         android.app.AlertDialog.Builder(requireContext())
             .setTitle("Изменение данных")
@@ -159,6 +159,6 @@ class CompanyFragment : Fragment(), MainActivity.Edit {
     }
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        (context as MainActivityInterface).updateTitle("Службы доставки")
+        (context as MainActivityInterface).updateTitle("Туристическое агенство")
     }
 }

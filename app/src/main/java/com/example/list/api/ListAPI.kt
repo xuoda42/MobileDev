@@ -5,7 +5,7 @@ import com.example.list.data.Companies
 import retrofit2.http.Body
 import retrofit2.http.Headers
 import retrofit2.http.POST
-import com.example.list.data.Couriersed
+import com.example.list.data.TourGuidesed
 import com.example.list.data.Ordered
 import com.example.list.data.User
 import com.example.list.data.UserLogin
@@ -31,11 +31,11 @@ interface ListAPI{
     fun postCompany(@Body postCompany: PostCompany): Call<PostResult>
 
     @GET("code=20")
-    fun getCouriers(): Call<Couriersed>
+    fun getTourGuides(): Call<TourGuidesed>
 
     @Headers("Content-Type: application/json")
-    @POST("couriers")
-    fun postCourier(@Body postCouriers: PostCouriers): Call<PostResult>
+    @POST("tourGuides")
+    fun postTourGuide(@Body postTourGuides: PostTourGuides): Call<PostResult>
 
     @GET("code=30")
     fun getOrders(): Call<Ordered>

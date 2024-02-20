@@ -7,7 +7,7 @@ import android.view.MenuItem
 import androidx.activity.addCallback
 import com.example.list.data.Orders
 import com.example.list.fragments.CompanyFragment
-import com.example.list.fragments.CouriersFragment
+import com.example.list.fragments.TourGuidesFragment
 import com.example.list.fragments.OrdersFragment
 import com.example.list.fragments.OrdersViewModel
 import com.example.list.interfaces.MainActivityInterface
@@ -34,11 +34,11 @@ class MainActivity : AppCompatActivity(), MainActivityInterface {
                     NamesOfFragment.COMPANY ->{
                         finish()
                     }
-                    NamesOfFragment.COURIERS ->{
+                    NamesOfFragment.TOURT_GUIDES ->{
                         activeFragment=NamesOfFragment.COMPANY
                     }
                     NamesOfFragment.ORDERS ->{
-                        activeFragment = NamesOfFragment.COURIERS
+                        activeFragment = NamesOfFragment.TOURT_GUIDES
                     }
                     NamesOfFragment.LOGIN->{
                         activeFragment=NamesOfFragment.COMPANY
@@ -57,9 +57,9 @@ class MainActivity : AppCompatActivity(), MainActivityInterface {
     private var _miAppendCompany:  MenuItem? =null
     private var _miUpdateCompany:  MenuItem? =null
     private var _miDeleteCompany:  MenuItem? =null
-    private var _miAppendCourier:  MenuItem? =null
-    private var _miUpdateCourier:  MenuItem? =null
-    private var _miDeleteCourier:  MenuItem? =null
+    private var _miAppendTourGuide:  MenuItem? =null
+    private var _miUpdateTourGuide:  MenuItem? =null
+    private var _miDeleteTourGuide:  MenuItem? =null
     private var _miSignup: MenuItem ?= null
     private var _miLogin: MenuItem ?= null
     private var _miExit: MenuItem ?= null
@@ -70,9 +70,9 @@ class MainActivity : AppCompatActivity(), MainActivityInterface {
         _miAppendCompany = menu?.findItem(R.id.miNewCompany)
         _miUpdateCompany = menu?.findItem(R.id.miUpdateCompany)
         _miDeleteCompany = menu?.findItem(R.id.miDeleteCompany)
-        _miAppendCourier = menu?.findItem(R.id.miAppendCourier)
-        _miUpdateCourier = menu?.findItem(R.id.miUpdateCourier)
-        _miDeleteCourier = menu?.findItem(R.id.miDeleteCourier)
+        _miAppendTourGuide = menu?.findItem(R.id.miAppendTourGuide)
+        _miUpdateTourGuide = menu?.findItem(R.id.miUpdateTourGuide)
+        _miDeleteTourGuide = menu?.findItem(R.id.miDeleteTourGuide)
         _miLogin = menu?.findItem(R.id.miLogin)
         _miExit = menu?.findItem(R.id.miExit)
 
@@ -88,12 +88,12 @@ class MainActivity : AppCompatActivity(), MainActivityInterface {
                 fragmentType == NamesOfFragment.COMPANY && ApplicationList2.isAdmin)
         _miDeleteCompany?.isVisible = (
                 fragmentType == NamesOfFragment.COMPANY && ApplicationList2.isAdmin)
-        _miAppendCourier?.isVisible = (
-                fragmentType == NamesOfFragment.COURIERS && ApplicationList2.isAdmin)
-        _miUpdateCourier?.isVisible = (
-                fragmentType == NamesOfFragment.COURIERS && ApplicationList2.isAdmin)
-        _miDeleteCourier?.isVisible = (
-                fragmentType == NamesOfFragment.COURIERS && ApplicationList2.isAdmin)
+        _miAppendTourGuide?.isVisible = (
+                fragmentType == NamesOfFragment.TOURT_GUIDES && ApplicationList2.isAdmin)
+        _miUpdateTourGuide?.isVisible = (
+                fragmentType == NamesOfFragment.TOURT_GUIDES && ApplicationList2.isAdmin)
+        _miDeleteTourGuide?.isVisible = (
+                fragmentType == NamesOfFragment.TOURT_GUIDES && ApplicationList2.isAdmin)
 
         _miLogin?.isVisible = (
                 fragmentType == NamesOfFragment.COMPANY && !ApplicationList2.isAdmin)
@@ -119,20 +119,20 @@ class MainActivity : AppCompatActivity(), MainActivityInterface {
                 fedit.delete()
                 true
             }
-            R.id.miAppendCourier->{
-                val fedit:Edit = CouriersFragment.getInstance()
+            R.id.miAppendTourGuide->{
+                val fedit:Edit = TourGuidesFragment.getInstance()
                 fedit.append()
                 true
             }
 
-            R.id.miUpdateCourier  ->{
-                val fedit:Edit = CouriersFragment.getInstance()
+            R.id.miUpdateTourGuide  ->{
+                val fedit:Edit = TourGuidesFragment.getInstance()
                 fedit.update()
                 true
             }
 
-            R.id.miDeleteCourier  ->{
-                val fedit:Edit = CouriersFragment.getInstance()
+            R.id.miDeleteTourGuide  ->{
+                val fedit:Edit = TourGuidesFragment.getInstance()
                 fedit.delete()
                 true
             }
@@ -160,10 +160,10 @@ class MainActivity : AppCompatActivity(), MainActivityInterface {
                     .addToBackStack(null)
                     .commit()
             }
-            NamesOfFragment.COURIERS -> {
+            NamesOfFragment.TOURT_GUIDES -> {
                 supportFragmentManager
                     .beginTransaction()
-                    .replace(R.id.fcMain, CouriersFragment.getInstance())
+                    .replace(R.id.fcMain, TourGuidesFragment.getInstance())
                     .addToBackStack(null)
                     .commit()
             }

@@ -26,7 +26,7 @@ import com.example.list.NamesOfFragment
 import com.example.list.api.ListAPI
 import com.example.list.api.ListConnection
 import com.example.list1110.R
-import com.example.list.data.Couriers
+import com.example.list.data.TourGuides
 import com.example.list.data.Orders
 import com.example.list.data.Ordered
 import com.example.list.database.ListDatabase
@@ -47,9 +47,9 @@ import java.text.SimpleDateFormat
 class OrderedFragment : Fragment() {
 
     companion object {
-        private lateinit var couriers: Couriers
-        fun newInstance(couriers: Couriers) : OrderedFragment {
-            this.couriers = couriers
+        private lateinit var tourGuides: TourGuides
+        fun newInstance(tourGuides: TourGuides) : OrderedFragment {
+            this.tourGuides = tourGuides
             return OrderedFragment()
         }
     }
@@ -76,12 +76,12 @@ class OrderedFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel = ViewModelProvider(this).get(OrdersViewModel::class.java)
-        viewModel.set_Courier_ByAdress(couriers)
+        viewModel.set_TourGuide_ByAdress(tourGuides)
         viewModel.ordersList.observe(viewLifecycleOwner){
             binding.rvOrders.adapter = StudentAdapter(it)
         }
         binding.fabNewOrder.setOnClickListener{
-            editOrder(Orders().apply { courierID = viewModel.couriers.id })
+            editOrder(Orders().apply { tourGuideID = viewModel.tourGuides.id })
         }
     }
     
@@ -101,7 +101,7 @@ class OrderedFragment : Fragment() {
 
     private fun editOrder(orders: Orders){
         (requireActivity() as MainActivityInterface).showFragment(NamesOfFragment.ORDERS, orders)
-        (requireActivity() as MainActivityInterface).updateTitle("Курьер ${viewModel.couriers.name}")
+        (requireActivity() as MainActivityInterface).updateTitle("Гид ${viewModel.tourGuides.name}")
     }
 
     private inner class StudentAdapter(private val items: List<Orders>)
@@ -176,22 +176,22 @@ class OrderedFragment : Fragment() {
 
                     
                     tvTN.setOnLongClickListener{
-                        viewModel.set_Courier_ByAdress(couriers)
+                        viewModel.set_TourGuide_ByAdress(tourGuides)
 
                         true
                     }
                     tvHC.setOnLongClickListener{
-                        viewModel.set_Courier_ByDate(couriers)
+                        viewModel.set_TourGuide_ByDate(tourGuides)
 
                         true
                     }
                     tvD.setOnLongClickListener{
-                        viewModel.set_Courier_ByTime(couriers)
+                        viewModel.set_TourGuide_ByTime(tourGuides)
 
                         true
                     }
                     tvP.setOnLongClickListener{
-                        viewModel.set_Courier_ByTimeTravel(couriers)
+                        viewModel.set_TourGuide_ByTimeTravel(tourGuides)
 
                         true
                     }

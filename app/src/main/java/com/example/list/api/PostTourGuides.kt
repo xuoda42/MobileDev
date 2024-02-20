@@ -1,9 +1,9 @@
 package com.example.list.api
 
-import com.example.list.data.Couriers
+import com.example.list.data.TourGuides
 import com.google.gson.annotations.SerializedName
 
-class PostCouriers (
+class PostTourGuides (
     @SerializedName("action") val action: Int,
-    @SerializedName("courier") val couriers: Couriers
+    @SerializedName("tourGuide") val tourGuides: TourGuides
 )

@@ -1,7 +1,7 @@
 package com.example.list.repository
 
 import com.example.list.data.Company
-import com.example.list.data.Couriers
+import com.example.list.data.TourGuides
 import com.example.list.data.Orders
 import kotlinx.coroutines.flow.Flow
 import java.util.UUID
@@ -14,14 +14,14 @@ interface DBRepository {
     suspend fun deleteCompany(company: Company)
     suspend fun deleteAllCompany()
 
-    fun getAllCouriers(): Flow<List<Couriers>>
-    fun getCompanyCouriers(companyID : UUID): Flow<List<Couriers>>
-    suspend fun insertCouriers(couriers: Couriers)
-    suspend fun deleteCouriers(couriers: Couriers)
-    suspend fun deleteAllCouriers()
+    fun getAllTourGuides(): Flow<List<TourGuides>>
+    fun getCompanyTourGuides(companyID : UUID): Flow<List<TourGuides>>
+    suspend fun insertTourGuides(tourGuides: TourGuides)
+    suspend fun deleteTourGuides(tourGuides: TourGuides)
+    suspend fun deleteAllTourGuides()
 
     fun getAllOrders(): Flow<List<Orders>>
-    fun getCouriersOrders(makersID : UUID): Flow<List<Orders>>
+    fun getTourGuidesOrders(makersID : UUID): Flow<List<Orders>>
     suspend fun insertOrders(orders: Orders)
     suspend fun deleteOrders(orders: Orders)
     suspend fun deleteAllOrders()

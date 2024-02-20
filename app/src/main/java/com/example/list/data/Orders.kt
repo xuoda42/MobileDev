@@ -10,12 +10,12 @@ import java.sql.Time
 import java.util.Date
 
 @Entity(tableName = "orders",
-    indices = [Index("id"), Index("courier_id", "id")],
+    indices = [Index("id"), Index("tour_guide_id", "id")],
     foreignKeys = [
         ForeignKey(
-            entity = Couriers::class,
+            entity = TourGuides::class,
             parentColumns = ["id"],
-            childColumns = ["courier_id"],
+            childColumns = ["tour_guide_id"],
             onDelete = ForeignKey.CASCADE
         )
     ]
@@ -26,7 +26,7 @@ data class Orders(
     @SerializedName("orderDetails") @ColumnInfo(name = "order_details") var orderDetails: String = "",
     @SerializedName("time") var time : String="",
     @SerializedName("date") @ColumnInfo(name = "date") var date : Date = Date(),
-    @SerializedName("courierID") @ColumnInfo(name = "courier_id") var courierID: Int=0,
+    @SerializedName("tourGuideID") @ColumnInfo(name = "tour_guide_id") var tourGuideID: Int=0,
     @SerializedName("phone") var phone: String="",
     @SerializedName("timeTravel") @ColumnInfo(name = "time_travel") var timeTravel: Int=0,
     @SerializedName("price") var price: String="",
